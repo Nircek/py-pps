@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 class PyPPSPC:
-    pass
+    def __init__(self, url):
+        self.url = url
 
 if __name__ == '__main__':
     print('Hello world!')
