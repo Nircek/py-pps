@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-class PyPPS:
+class PyPPSPC:
     pass
 
 if __name__ == '__main__':
