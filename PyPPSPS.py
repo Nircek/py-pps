@@ -4,15 +4,15 @@ class PyPPSPS:
         self.server = server
     def connect(self):
         pass
-    def log(msg):
+    def log(self, msg):
         pass
-    def pop():
+    def pop(self):
         pass
-    def reply(user, text):
+    def reply(self, user, text):
         pass
-    def varread(user, name):
+    def varread(self, user, name):
         pass
-    def varwrite(user, name, value):
+    def varwrite(self, user, name, value):
         pass
 
 if __name__ == '__main__':
