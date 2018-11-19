@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 class PyPPSPS:
-    def __init__(self, server):
+    def __init__(self, url, server):
         self.server = server
     def connect(self):
         pass
