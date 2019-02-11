@@ -14,15 +14,15 @@ class PyPPSPS:
             else:
                 break
     def log(self, msg):
-        pass
+        perform(self.url, '', {'server':self.server, 'log': msg})
     def pop(self):
-        pass
+        perform(self.url, '', {'server':self.server})
     def reply(self, user, text):
-        pass
+        perform(self.url, '', {'server':self.server, 'text': text, 'user': user})
     def varread(self, user, name):
-        pass
+        perform(self.url, '', {'server':self.server, 'name': name, 'user': user})
     def varwrite(self, user, name, value):
-        pass
+        perform(self.url, '', {'server':self.server, 'name': name, 'user': user, 'value': value})
 
 def main():
     p = PyPPSPS('http://pps.rf.gd', 'test')
