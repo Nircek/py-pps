@@ -31,6 +31,9 @@ class Reply:
         return 'Reply' + repr((self.type, self.args))
 
 class PyPPSPS:
+    def inputfunc(self, title, msg):
+        print(title, msg, sep='\n')
+        return input()
     def __init__(self, url, server):
         self.url = url
         self.server = server
@@ -38,8 +41,7 @@ class PyPPSPS:
         while True:
             self.version = url(self.url+'/pseudophpserver.php')
             if self.version[0] != 'v':
-                print('Open', self.url+'/cookies.php', 'and paste here what you get')
-                url.cookie = input()
+                url.cookie = self.inputfunc('Authorization', 'Open ' + self.url+'/cookies.php' + ' and paste here what you get')
             else:
                 break
     def log(self, msg):
@@ -53,7 +55,11 @@ class PyPPSPS:
     def varwrite(self, user, name, value):
         pass
 
-if __name__ == '__main__':
+def main():
     p = PyPPSPS('http://pps.rf.gd', 'test')
     p.connect()
     print(p.version)
+
+
+if __name__ == '__main__':
+    main()
