@@ -19,6 +19,8 @@ class PPSCode(Enum):
             return PPSCode.UNEXPECTEDERROR
         else:
             return d[s[0]]
+    def __bool__(self):
+        return self == PPSCode.GOOD
 
 class Reply:
     def __init__(self, s):
@@ -30,10 +32,11 @@ class Reply:
     def __repr__(self):
         return 'Reply' + repr((self.type, self.args))
 
+def inputfunc(title, msg):
+    print(title, msg, sep='\n')
+    return input()
+
 class PyPPSPS:
-    def inputfunc(self, title, msg):
-        print(title, msg, sep='\n')
-        return input()
     def __init__(self, url, server):
         self.url = url
         self.server = server
@@ -41,7 +44,7 @@ class PyPPSPS:
         while True:
             self.version = url(self.url+'/pseudophpserver.php')
             if self.version[0] != 'v':
-                url.cookie = self.inputfunc('Authorization', 'Open ' + self.url+'/cookies.php' + ' and paste here what you get')
+                url.cookie = inputfunc('Authorization', 'Open ' + self.url+'/cookies.php' + ' and paste here what you get')
             else:
                 break
     def log(self, msg):
