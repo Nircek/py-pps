@@ -60,5 +60,19 @@ class PPSReply:
         if self.type != PPSCode.UNEXPECTEDERROR:
             s = s[1:]
         self.args = s.split('\N{Symbol For Unit Separator}')
+    def exec(self):
+        c = PPSDBError if self.type == PPSCode.DBERROR else PPSUnexpectedError
+        if self.type == PPSCode.ERROR:
+            d = { '1': PPSParameterError,
+                  '2': PPSUserDeniedError,
+                  '3': PPSAdminDeniedError,
+                  '4': PPSLogError,
+                  '5': PPSNullError,
+                  '6': PPSSameUserError}
+            c = d[self.args[0]] if self.args[0] in d else PPSUnsupportedError
+        if self.type:
+            return self.args
+        else:
+            raise c(self.args)
     def __repr__(self):
         return 'PPSReply' + repr((self.type, self.args))
