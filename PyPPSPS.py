@@ -20,6 +20,16 @@ class PPSCode(Enum):
         else:
             return d[s[0]]
 
+class Reply:
+    def __init__(self, s):
+        s=s.rstrip('\r\n')
+        self.type = PPSCode.get(s)
+        if self.type != PPSCode.UNEXPECTEDERROR:
+            s = s[1:]
+        self.args = s.split('\N{Symbol For Unit Separator}')
+    def __repr__(self):
+        return 'Reply' + repr((self.type, self.args))
+
 class PyPPSPS:
     def __init__(self, url, server):
         self.url = url
