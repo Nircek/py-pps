@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from enum import Enum
+from urllib.request import Request, urlopen
 
 class PPSCodeException(Exception):
     pass
@@ -83,6 +84,13 @@ def url(uri):
     q.add_header('Cookie', url.cookie)
     return urlopen(q).read().decode()
 url.cookie = '__test=eb93faad212ed7dc5ddc4a144182d12d '
+
+def perform(uri, cmd, params=()):
+    args='?'
+    for k, v in params.items():
+        args += k + '=' + v + '&'
+    args = args[:-1]
+    return PPSReply(url(uri+'/'+cmd+'.php'+args)).exec()
 
 def inputfunc(title, msg):
     print(title, msg, sep='\n')
