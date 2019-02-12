@@ -34,7 +34,7 @@ def main():
     p.connect()
     print(p.version())
     p.login('root', 'toor')
-    p.push('Hello from Python!')
+    print(p.refresh())
 
 if __name__ == '__main__':
     main()

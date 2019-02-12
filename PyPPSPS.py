@@ -34,8 +34,7 @@ def main():
     p = PyPPSPS('http://pps.rf.gd', 'test')
     p.connect()
     print(p.version())
-    print(p.pop())
-
+    p.log('test')
 
 if __name__ == '__main__':
     main()
