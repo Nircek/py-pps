@@ -28,13 +28,3 @@ class PyPPSPC:
         return perform(self.url, 'push', {'user': self.user, 'pass': self.password, 'event': event})
     def refresh(self):
         return perform(self.url, 'refresh', {'user': self.user, 'pass': self.password})
-
-def main():
-    p = PyPPSPC('http://pps.rf.gd')
-    p.connect()
-    print(p.version())
-    p.login('root', 'toor')
-    print(p.refresh())
-
-if __name__ == '__main__':
-    main()

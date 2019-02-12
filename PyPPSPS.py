@@ -29,12 +29,3 @@ class PyPPSPS:
         return perform(self.url, 'varread', {'server':self.server, 'name': name, 'user': user})
     def varwrite(self, user, name, value):
         return perform(self.url, 'varwrite', {'server':self.server, 'name': name, 'user': user, 'value': value})
-
-def main():
-    p = PyPPSPS('http://pps.rf.gd', 'test')
-    p.connect()
-    print(p.version())
-    p.log('test')
-
-if __name__ == '__main__':
-    main()

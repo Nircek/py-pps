@@ -2,47 +2,7 @@
 from enum import Enum
 from urllib.request import Request, urlopen
 from urllib.parse import quote_plus
-
-class PPSCodeException(Exception):
-    pass
-
-class PPSError(PPSCodeException):
-    pass
-
-class PPSDBError(PPSCodeException):
-    pass
-
-class PPSUnexpectedError(PPSCodeException):
-    pass
-
-'''
-1   Not enough parameters in the request
-2   User privileges denied
-3   Admin privileges denied
-4   Log file problem
-5   No elements in the queue
-6   A user with the same login exists
-'''
-class PPSParameterError(PPSError):
-    pass
-
-class PPSUserDeniedError(PPSError):
-    pass
-
-class PPSAdminDeniedError(PPSError):
-    pass
-
-class PPSLogError(PPSError):
-    pass
-
-class PPSNullError(PPSError):
-    pass
-
-class PPSSameUserError(PPSError):
-    pass
-
-class PPSUnsupportedError(PPSError):
-    pass
+from PPSExceptions import *
 
 class PPSCode(Enum):
     GOOD = 0
@@ -78,32 +38,3 @@ class PPSReply:
             raise c(self.args)
     def __repr__(self):
         return 'PPSReply' + repr((self.type, self.args))
-
-def url(uri):
-    try:
-        q = Request(uri)
-        q.add_header('User-Agent', 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405')
-        q.add_header('Cookie', url.cookie)
-        return urlopen(q).read().decode()
-    except Exception:
-        print(uri)
-        raise
-url.cookie = '__test=c3495eae2f165b2aa28f8d430d413014 '
-
-def perform(uri, cmd, params=()):
-    args='?'
-    for k, v in params.items():
-        args += quote_plus(k) + '=' + quote_plus(v) + '&'
-    args = args[:-1]
-    return PPSReply(url(uri+'/'+cmd+'.php'+args)).exec()
-
-def inputfunc(title, msg):
-    print(title, msg, sep='\n')
-    return input()
-
-def boolfunc(title, msg):
-    print(title, str(msg)+' [type \'y\' to agree or \'n\' to disagree and press enter]:', sep='\n')
-    s = ''
-    while not (s == 'y' or s == 'n'):
-        s = input()
-    return True if s == 'y' else False
