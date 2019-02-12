@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+from urllib.request import Request, urlopen
+from urllib.parse import quote_plus
+from PPSReply import *
+import warnings
 
 def url(uri):
     try:
@@ -17,6 +21,27 @@ def perform(uri, cmd, params=()):
         args += quote_plus(k) + '=' + quote_plus(v) + '&'
     args = args[:-1]
     return PPSReply(url(uri+'/'+cmd+'.php'+args)).exec()
+
+getVersion = lambda uri: url(uri+'/pseudophpserver.php').rstrip('\r\n')
+
+def connect(self, auto=False, force=False):
+    '''
+        If `auto` is True, there will be no user interactions and everything will be done automatically,
+        then there can be chosen by `force` what to do with the version mismatch.
+        If `force` is True, connect() will connect to the server despite the version mismatch.
+        Otherwise, if `force` is False, connect() will raise NotConnectedError when version mismatch occurs.
+    '''
+    if not self.test():
+        if not auto:
+            url.cookie = self.input('Authorization', 'Open ' + self.url+'/cookies.php' + ' and paste here what you get')
+        if not self.test():
+            raise NotConnectedError('Authorization fails')
+    rv = self.version()
+    if rv != self.PPSversion:
+        if not (force or self.bool('Version mismatch', 'Your version of PPS is \''+self.PPSversion+'\' but version of chosen server\'s PPS is \''
+                            +rv+'\'. Do you want to continue connecting to the server?')):
+            raise NotConnectedError('User chose not to continue connecting to the server.')
+        warnings.warn('Version mismatch (loc: '+self.PPSversion+'; rem: '+rv+')')
 
 def inputfunc(title, msg):
     print(title, msg, sep='\n')

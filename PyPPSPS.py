@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from PPSReply import *
+from PPSDefaults import *
 
 class PyPPSPS:
     PPSversion = 'v1.3'
@@ -8,17 +9,9 @@ class PyPPSPS:
         self.server = server
         self.input = inputfunc
         self.bool = boolfunc
-    def version(self):
-        return url(self.url+'/pseudophpserver.php').rstrip('\r\n')
+    version = lambda self: getVersion(self.url)
     test = lambda self: self.version()[0] == 'v'
-    def connect(self):
-        while not self.test():
-            url.cookie = self.input('Authorization', 'Open ' + self.url+'/cookies.php' + ' and paste here what you get')
-        rv = self.version()
-        if rv != self.PPSversion:
-            if not self.bool('Version mismatch', 'Your version of PPS is \''+self.PPSversion+'\' but version of chosen server\'s PPS is \''
-                             +rv+'\'. Do you want to continue connecting to this server?'):
-                raise SystemExit('User chose not to continue connecting to the server.')
+    connect = connect
     def log(self, msg):
         return perform(self.url, 'log', {'server':self.server, 'log': msg})
     def pop(self):

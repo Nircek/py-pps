@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 from enum import Enum
-from urllib.request import Request, urlopen
-from urllib.parse import quote_plus
 from PPSExceptions import *
 
 class PPSCode(Enum):

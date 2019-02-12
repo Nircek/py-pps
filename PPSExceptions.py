@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+class NotConnectedError:
+    pass
+
 class PPSCodeException(Exception):
     pass
 
