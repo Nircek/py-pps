@@ -1,7 +1,7 @@
 # py-pps
 ##### Python PseudoPHPServer library
 
-The module connecting Python with PPS
+The module connecting Python with [PPS](https://github.com/Nircek/pseudophpserver)
 ## Examples
 ### PyPPSPS
 ```python3
