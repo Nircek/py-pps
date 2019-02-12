@@ -20,14 +20,14 @@ class PyPPSPC:
                              +rv+'\'. Do you want to continue connecting to this server?'):
                 raise SystemExit('User chose not to continue connecting to the server.')
     def register(self, user, password):
-        perform(self.url, 'register', {'user': user, 'pass': password})
+        return perform(self.url, 'register', {'user': user, 'pass': password})
     def login(self, user, password):
         self.user = user
         self.password = password
     def push(self, event):
-        perform(self.url, 'push', {'user': self.user, 'pass': self.password, 'event': event})
+        return perform(self.url, 'push', {'user': self.user, 'pass': self.password, 'event': event})
     def refresh(self):
-        perform(self.url, 'refresh', {'user': self.user, 'pass': self.password})
+        return perform(self.url, 'refresh', {'user': self.user, 'pass': self.password})
 
 def main():
     p = PyPPSPC('http://pps.rf.gd')

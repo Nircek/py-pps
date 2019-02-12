@@ -88,7 +88,7 @@ def url(uri):
     except Exception:
         print(uri)
         raise
-url.cookie = '__test=eb93faad212ed7dc5ddc4a144182d12d '
+url.cookie = '__test=c3495eae2f165b2aa28f8d430d413014 '
 
 def perform(uri, cmd, params=()):
     args='?'

@@ -20,21 +20,21 @@ class PyPPSPS:
                              +rv+'\'. Do you want to continue connecting to this server?'):
                 raise SystemExit('User chose not to continue connecting to the server.')
     def log(self, msg):
-        perform(self.url, 'log', {'server':self.server, 'log': msg})
+        return perform(self.url, 'log', {'server':self.server, 'log': msg})
     def pop(self):
-        perform(self.url, 'pop', {'server':self.server})
+        return perform(self.url, 'pop', {'server':self.server})
     def reply(self, user, text):
-        perform(self.url, 'reply', {'server':self.server, 'text': text, 'user': user})
+        return perform(self.url, 'reply', {'server':self.server, 'text': text, 'user': user})
     def varread(self, user, name):
-        perform(self.url, 'varread', {'server':self.server, 'name': name, 'user': user})
+        return perform(self.url, 'varread', {'server':self.server, 'name': name, 'user': user})
     def varwrite(self, user, name, value):
-        perform(self.url, 'varwrite', {'server':self.server, 'name': name, 'user': user, 'value': value})
+        return perform(self.url, 'varwrite', {'server':self.server, 'name': name, 'user': user, 'value': value})
 
 def main():
     p = PyPPSPS('http://pps.rf.gd', 'test')
     p.connect()
     print(p.version())
-    p.log('Hello from Python!')
+    print(p.pop())
 
 
 if __name__ == '__main__':
