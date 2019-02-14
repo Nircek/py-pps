@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from urllib.request import Request, urlopen
 from urllib.parse import quote_plus
-from PPSReply import *
+from .PPSReply import *
 import warnings
 
 def url(uri):

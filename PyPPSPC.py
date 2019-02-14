@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from PPSReply import *
-from PPSDefaults import *
+from .PPSReply import *
+from .PPSDefaults import *
 
 class PyPPSPC:
     PPSversion = 'v1.3'

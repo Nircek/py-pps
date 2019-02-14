@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from enum import Enum
-from PPSExceptions import *
+from .PPSExceptions import *
 
 class PPSCode(Enum):
     GOOD = 0
