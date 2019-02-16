@@ -19,7 +19,7 @@ class PPSReply:
         self.type = PPSCode.get(s)
         if self.type != PPSCode.UNEXPECTEDERROR:
             s = s[1:]
-        self.args = s.split('\N{Symbol For Unit Separator}')
+        self.args = (s.split('\N{Symbol For Unit Separator}', 1) + ['']*2)[:2]
     def exec(self):
         c = PPSDBError if self.type == PPSCode.DBERROR else PPSUnexpectedError
         if self.type == PPSCode.ERROR:
