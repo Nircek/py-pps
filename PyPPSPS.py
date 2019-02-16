@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from .PPSReply import *
 from .PPSDefaults import *
+import json
 
 class PyPPSPS:
     PPSversion = 'v1.3'
@@ -30,13 +31,16 @@ class PyPPSPS:
             user = ''
         return perform(self.url, 'varwrite', {'server':self.server, 'name': name, 'user': user, 'value': value})
     def popj(self):
-        return json.loads(self.pop()[0])
+        o = self.pop()
+        r = json.loads(o[1])
+        r['user'] = o[0]
+        return r
     def replyj(self, user, text):
         return self.reply(user, json.dumps(text))
     def varreadj(self, user, name=None):
-        return json.loads(self.varread(user, name))
+        return json.loads(joinUS(self.varread(user, name)))
     def varwritej(self, user, name, value=None):
         if value is None:
             return self.varwrite(user, json,dumps(name))
         else:
-            return self.varwrite(user, name, json.dumps(value)})
+            return self.varwrite(user, name, json.dumps(value))

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from .PPSReply import *
 from .PPSDefaults import *
+import json
 
 class PyPPSPC:
     PPSversion = 'v1.3'
@@ -24,4 +25,4 @@ class PyPPSPC:
     def pushj(self, event):
         return self.push(json.dumps(event))
     def refreshj(self):
-        return json.loads(self.refresh())
+        return json.loads(joinUS(self.refresh()))

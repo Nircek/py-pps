@@ -19,6 +19,7 @@ def perform(uri, cmd, params={}):
     return PPSReply(url(uri+'/'+cmd+'.php', params)).exec()
 
 getVersion = lambda uri: url(uri+'/pseudophpserver.php').rstrip('\r\n')
+joinUS = lambda x: x[0] if x[1] == '' else '\N{Symbol For Unit Separator}'.join(x) # join Unit Separator
 
 def connect(self, auto=False, force=False):
     '''
