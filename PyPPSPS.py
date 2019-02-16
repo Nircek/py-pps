@@ -18,15 +18,25 @@ class PyPPSPS:
         return perform(self.url, 'pop', {'server':self.server})
     def reply(self, user, text):
         return perform(self.url, 'reply', {'server':self.server, 'text': text, 'user': user})
-    def varread(self, user, name):
+    def varread(self, user, name=None):
+        if name is None:
+            name = user
+            user = ''
         return perform(self.url, 'varread', {'server':self.server, 'name': name, 'user': user})
-    def varwrite(self, user, name, value):
+    def varwrite(self, user, name, value=None):
+        if value is None:
+            value = name
+            name = user
+            user = ''
         return perform(self.url, 'varwrite', {'server':self.server, 'name': name, 'user': user, 'value': value})
     def popj(self):
         return json.loads(self.pop()[0])
     def replyj(self, user, text):
         return self.reply(user, json.dumps(text))
-    def varreadj(self, user, name):
+    def varreadj(self, user, name=None):
         return json.loads(self.varread(user, name))
-    def varwritej(self, user, name, value):
-        return self.varwrite(user, name, json.dumps(value)})
+    def varwritej(self, user, name, value=None):
+        if value is None:
+            return self.varwrite(user, json,dumps(name))
+        else:
+            return self.varwrite(user, name, json.dumps(value)})
