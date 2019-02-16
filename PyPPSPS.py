@@ -22,3 +22,11 @@ class PyPPSPS:
         return perform(self.url, 'varread', {'server':self.server, 'name': name, 'user': user})
     def varwrite(self, user, name, value):
         return perform(self.url, 'varwrite', {'server':self.server, 'name': name, 'user': user, 'value': value})
+    def popj(self):
+        return json.loads(self.pop()[0])
+    def replyj(self, user, text):
+        return self.reply(user, json.dumps(text))
+    def varreadj(self, user, name):
+        return json.loads(self.varread(user, name))
+    def varwritej(self, user, name, value):
+        return self.varwrite(user, name, json.dumps(value)})

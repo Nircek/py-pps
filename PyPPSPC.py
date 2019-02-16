@@ -21,3 +21,7 @@ class PyPPSPC:
         return perform(self.url, 'push', {'user': self.user, 'pass': self.password, 'event': event})
     def refresh(self):
         return perform(self.url, 'refresh', {'user': self.user, 'pass': self.password})
+    def pushj(self, event):
+        return self.push(json.dumps(event))
+    def refreshj(self):
+        return json.loads(self.refresh())
