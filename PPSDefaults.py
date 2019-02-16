@@ -25,7 +25,7 @@ joinUS = lambda x: x[0] if x[1] == '' else '\N{Symbol For Unit Separator}'.join(
 def loads(x):
     try:
         return json.loads(x)
-    except JSONDecoderError:
+    except json.decoder.JSONDecodeError:
         return x
 
 def connect(self, auto=False, force=False):

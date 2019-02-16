@@ -33,6 +33,8 @@ class PyPPSPS:
     def popj(self):
         o = self.pop()
         r = loads(o[1])
+        if not type(r) is dict:
+            r = {'PyPPSPS.casted': True, 'data': r}
         r['user'] = o[0]
         return r
     def replyj(self, user, text):
