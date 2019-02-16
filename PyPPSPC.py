@@ -25,4 +25,4 @@ class PyPPSPC:
     def pushj(self, event):
         return self.push(json.dumps(event))
     def refreshj(self):
-        return json.loads(joinUS(self.refresh()))
+        return loads(joinUS(self.refresh()))

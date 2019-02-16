@@ -3,6 +3,7 @@ from urllib.request import Request, urlopen
 from urllib.parse import quote_plus, urlencode
 from .PPSReply import *
 import warnings
+import json
 
 def url(uri, data={}):
     try:
@@ -20,6 +21,12 @@ def perform(uri, cmd, params={}):
 
 getVersion = lambda uri: url(uri+'/pseudophpserver.php').rstrip('\r\n')
 joinUS = lambda x: x[0] if x[1] == '' else '\N{Symbol For Unit Separator}'.join(x) # join Unit Separator
+
+def loads(x):
+    try:
+        return json.loads(x)
+    except JSONDecoderError:
+        return x
 
 def connect(self, auto=False, force=False):
     '''
