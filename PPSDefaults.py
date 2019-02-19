@@ -14,7 +14,7 @@ def url(uri, data={}):
     except Exception:
         print(uri)
         raise
-url.cookie = '__test=c3495eae2f165b2aa28f8d430d413014 '
+url.cookie = '__test=90bf0a9c3cbb67e23a4d482451db0a13 '
 
 def perform(uri, cmd, params={}):
     return PPSReply(url(uri+'/'+cmd+'.php', params)).exec()
