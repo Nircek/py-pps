@@ -1,4 +1,4 @@
-# py-pps
+# pypps
 ##### Python PseudoPHPServer library
 
 The module connecting Python with [PPS](https://github.com/Nircek/pseudophpserver)
